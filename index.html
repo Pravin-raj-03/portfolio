@@ -1,145 +1,1345 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html class="dark" lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pravin raj | AI & Robotics Engineer</title>
-    <meta name="description" content="Portfolio of Pravin raj, specializing in AI, Robotics, and Simulation.">
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Outfit:wght@700;800&display=swap" rel="stylesheet">
-    
-    <!-- Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    
-    <link rel="stylesheet" href="style.css">
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Pravin Raj | AI & Data Science Engineer</title>
+    <meta name="description"
+        content="Portfolio of Pravin Raj — AI, Robotics, and Data Science engineer specializing in multi-agent systems, generative AI, and intelligent simulation." />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary-fixed": "#5d5f5f",
+                        "surface-variant": "#353535",
+                        "outline-variant": "#474747",
+                        "on-surface": "#e2e2e2",
+                        "surface-container-lowest": "#0e0e0e",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-container-highest": "#353535",
+                        "surface-container": "#1f1f1f",
+                        "surface-container-low": "#1b1b1b",
+                        "surface-dim": "#131313",
+                        "surface": "#131313",
+                        "background": "#131313",
+                        "on-background": "#e2e2e2",
+                        "on-primary": "#1a1c1c",
+                        "on-primary-fixed": "#ffffff",
+                        "primary": "#ffffff",
+                        "secondary": "#c7c6c6",
+                        "on-secondary": "#1b1c1c",
+                        "on-surface-variant": "#c6c6c6",
+                        "outline": "#919191",
+                        "inverse-surface": "#e2e2e2",
+                        "tertiary": "#e4e2e1",
+                    },
+                    fontFamily: {
+                        "headline": ["Syne", "sans-serif"],
+                        "body": ["Outfit", "sans-serif"],
+                        "label": ["Syne", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"]
+                    },
+                    borderRadius: { "DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .scanline-overlay {
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.05) 50%),
+                linear-gradient(90deg, rgba(255, 0, 0, 0.01), rgba(0, 255, 0, 0.005), rgba(0, 0, 255, 0.01));
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: 0
+            }
+        }
+
+        .cursor-blink {
+            animation: blink 1.1s step-start infinite;
+        }
+
+        @keyframes typeIn {
+            from {
+                width: 0;
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        #mobile-menu {
+            display: none;
+        }
+
+        #mobile-menu.open {
+            display: flex;
+        }
+
+        /* ── Terminal FAQ ── */
+        #terminal-body {
+            height: 360px;
+            overflow-y: auto;
+        }
+
+        #terminal-body::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        #terminal-body::-webkit-scrollbar-thumb {
+            background: #474747;
+        }
+
+        .term-line {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .term-prompt {
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .term-cmd {
+            color: #c6c6c6;
+        }
+
+        .term-output {
+            color: #a0a0a0;
+            padding-left: 16px;
+            line-height: 1.7;
+        }
+
+        .term-output .highlight {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .term-btn {
+            display: inline-block;
+            font-size: 10px;
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border: 1px solid #474747;
+            padding: 4px 10px;
+            margin: 3px 3px 3px 0;
+            cursor: pointer;
+            color: #c6c6c6;
+            background: transparent;
+            transition: background 0.1s, color 0.1s;
+        }
+
+        .term-btn:hover {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+        }
+
+        .term-btn.active-cmd {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+        }
+
+        #term-input-line {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-top: 1px solid #474747;
+            padding-top: 10px;
+            margin-top: 8px;
+        }
+
+        #term-input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #c6c6c6;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            flex: 1;
+            caret-color: #fff;
+        }
+
+        /* Audio Visualizer */
+        @keyframes oscillate {
+            0%, 100% { height: 3px; }
+            50% { height: 10px; }
+        }
+        .playing .bar {
+            animation: oscillate 0.6s infinite ease-in-out;
+        }
+        .bar {
+            width: 2px;
+            height: 3px;
+            background: #FFFFFF;
+            transition: height 0.3s;
+        }
+        .bar:nth-child(2) { animation-delay: 0.2s; }
+        .bar:nth-child(3) { animation-delay: 0.4s; }
+    </style>
 </head>
-<body>
-    <nav id="navbar">
-        <div class="container nav-content">
-            <a href="#" class="logo gradient-text">Pravin.raj</a>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+
+<body class="bg-surface-container-lowest text-on-surface font-body selection:bg-primary selection:text-on-primary">
+    <div class="fixed inset-0 scanline-overlay z-50 pointer-events-none"></div>
+
+    <!-- ═══════════ TOP APP BAR ═══════════ -->
+    <header
+        class="bg-[#0E0E0E] text-white font-headline uppercase tracking-tighter text-sm flex justify-between items-center w-full px-6 py-4 fixed top-0 z-40 border-b border-[#474747]/30">
+        <div class="text-xl font-bold tracking-tighter">PRAVIN_RAJ</div>
+        <nav class="hidden md:flex gap-8 items-center">
+            <a class="text-[#C6C6C6] font-mono text-xs hover:bg-white hover:text-black px-2 py-1 transition-colors duration-75"
+                href="#about">ABOUT</a>
+            <a class="text-[#C6C6C6] font-mono text-xs hover:bg-white hover:text-black px-2 py-1 transition-colors duration-75"
+                href="#projects">PROJECTS</a>
+            <a class="text-[#C6C6C6] font-mono text-xs hover:bg-white hover:text-black px-2 py-1 transition-colors duration-75"
+                href="#faq">FAQ</a>
+            <a class="text-[#C6C6C6] font-mono text-xs hover:bg-white hover:text-black px-2 py-1 transition-colors duration-75"
+                href="#contact">CONTACT</a>
+        </nav>
+        <div class="font-mono text-[10px] tracking-widest text-primary opacity-80">[ STATUS: OPEN_TO_WORK ]</div>
+        
+        <!-- ── MODULE: STICKY_MEDIA_PLAYER ── -->
+        <div id="sticky-player" class="hidden md:flex items-center gap-4 bg-[#1A1A1A]/80 backdrop-blur-md border border-white/10 px-4 py-2 fixed top-[72px] right-6 z-50 group transition-all duration-300 hover:bg-[#222]">
+            <!-- Visualizer -->
+            <div id="visualizer" class="flex items-end gap-[2px] h-3 w-3">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            
+            <div class="flex flex-col">
+                <div id="track-name" class="text-[9px] font-mono whitespace-nowrap overflow-hidden w-24">Vivaldi: Winter I</div>
+                <div id="track-artist" class="text-[7px] opacity-40 font-mono tracking-tight">The Four Seasons</div>
+            </div>
+            
+            <div class="flex items-center gap-2 border-l border-white/10 pl-4">
+                <button onclick="prevTrack()" class="material-symbols-outlined text-sm opacity-40 hover:opacity-100">skip_previous</button>
+                <button id="play-pause-btn" onclick="togglePlay()" class="material-symbols-outlined text-xl">play_arrow</button>
+                <button onclick="nextTrack()" class="material-symbols-outlined text-sm opacity-40 hover:opacity-100">skip_next</button>
+            </div>
+
+            <!-- Mini Progress Bar -->
+            <div id="progress-container" class="absolute bottom-0 left-0 h-[1.5px] bg-outline-variant/20 w-full cursor-pointer">
+                <div id="progress-bar" class="h-full bg-primary w-0 transition-all duration-100"></div>
+            </div>
+            
+            <span id="player-time" class="hidden group-hover:block absolute -bottom-4 right-0 text-[8px] font-mono opacity-40">0:00 / 0:00</span>
         </div>
-    </nav>
 
-    <main>
-        <!-- Hero Section -->
-        <section class="hero section-padding">
-            <div class="container">
-                <div class="hero-content">
-                    <h1 class="hero-title">Architecting the <span class="gradient-text">Future of AI</span></h1>
-                    <p class="hero-subtitle">Specializing in Robotics, Supercomputing Failure Prediction, and Multi-Agent Simulations.</p>
-                    <div class="hero-btns">
-                        <a href="#projects" class="btn btn-primary">View Projects</a>
-                        <a href="#contact" class="btn glass-morphism" style="margin-left: 1rem;">Let's Talk</a>
-                    </div>
+        <button class="md:hidden text-white" onclick="toggleMenu()">
+            <span class="material-symbols-outlined">menu</span>
+        </button>
+    </header>
+
+    <!-- Mobile Nav -->
+    <div id="mobile-menu"
+        class="fixed top-14 left-0 w-full bg-[#0E0E0E] z-40 flex-col gap-4 px-6 py-6 border-b border-[#474747]/30">
+        <a class="font-mono text-xs text-[#C6C6C6] hover:text-white" href="#about" onclick="toggleMenu()">ABOUT</a>
+        <a class="font-mono text-xs text-[#C6C6C6] hover:text-white" href="#projects"
+            onclick="toggleMenu()">PROJECTS</a>
+        <a class="font-mono text-xs text-[#C6C6C6] hover:text-white" href="#faq" onclick="toggleMenu()">FAQ</a>
+        <a class="font-mono text-xs text-[#C6C6C6] hover:text-white" href="#contact" onclick="toggleMenu()">CONTACT</a>
+    </div>
+
+    <div class="flex min-h-screen pt-16">
+
+        <!-- ═══════════ SIDEBAR ═══════════ -->
+        <aside
+            class="bg-[#131313] text-white font-mono text-xs uppercase tracking-widest h-screen w-64 border-r border-[#474747]/20 hidden md:flex flex-col py-8 fixed">
+            <div class="px-6 mb-10">
+                <div class="font-black text-white text-lg tracking-tight">PRAVIN_RAJ</div>
+                <div class="text-[10px] text-on-surface-variant mt-1">AI / ML ENGINEER</div>
+                <div class="text-[10px] text-on-surface-variant">DATA SCIENCE RESEARCHER</div>
+            </div>
+            <nav id="side-nav" class="flex-grow space-y-1">
+                <a href="#about"
+                    class="side-link text-[#C6C6C6] px-4 py-2 flex items-center gap-3 hover:text-white hover:bg-[#2A2A2A] transition-all duration-100"><span
+                        class="material-symbols-outlined text-sm">person</span>ABOUT</a>
+                <a href="#projects"
+                    class="side-link text-[#C6C6C6] px-4 py-2 flex items-center gap-3 hover:text-white hover:bg-[#2A2A2A] transition-all duration-100"><span
+                        class="material-symbols-outlined text-sm">hub</span>PROJECTS</a>
+                <a href="#skills"
+                    class="side-link text-[#C6C6C6] px-4 py-2 flex items-center gap-3 hover:text-white hover:bg-[#2A2A2A] transition-all duration-100"><span
+                        class="material-symbols-outlined text-sm">terminal</span>SKILLS</a>
+                <a href="#faq"
+                    class="side-link text-[#C6C6C6] px-4 py-2 flex items-center gap-3 hover:text-white hover:bg-[#2A2A2A] transition-all duration-100"><span
+                        class="material-symbols-outlined text-sm">question_answer</span>FAQ</a>
+                <a href="#contact"
+                    class="side-link text-[#C6C6C6] px-4 py-2 flex items-center gap-3 hover:text-white hover:bg-[#2A2A2A] transition-all duration-100"><span
+                        class="material-symbols-outlined text-sm">mail</span>CONTACT</a>
+            </nav>
+            
+            <div class="px-4 space-y-4">
+                <a href="mailto:rppravinrajprakash@gmail.com"
+                    class="block w-full bg-primary text-on-primary font-bold py-3 text-[10px] tracking-widest text-center hover:bg-[#e0e0e0] transition-colors">
+                    GET_IN_TOUCH
+                </a>
+                <div class="pt-4 border-t border-outline-variant/20 flex flex-col gap-1">
+                    <a href="https://github.com/Pravin-raj-03" target="_blank"
+                        class="text-[#C6C6C6] px-4 py-2 flex items-center gap-3 hover:text-white text-[10px]">
+                        <span class="material-symbols-outlined text-xs">code</span>GITHUB
+                    </a>
+                    <a href="https://linkedin.com/in/pravin-raj-r-p" target="_blank"
+                        class="text-[#C6C6C6] px-4 py-2 flex items-center gap-3 hover:text-white text-[10px]">
+                        <span class="material-symbols-outlined text-xs">link</span>LINKEDIN
+                    </a>
                 </div>
             </div>
-        </section>
+        </aside>
 
-        <!-- About Section -->
-        <section id="about" class="section-padding">
-            <div class="container">
-                <div class="about-grid">
-                    <div class="about-text">
-                        <h2 class="section-title">About Me</h2>
-                        <p>I am a developer driven by curiosity and a passion for building intelligent systems. My work spans across deep learning, robotics choreography with ROS2, and complex system simulations. I love exploring the intersection of luck, strategy, and talent in digital environments.</p>
-                        <div class="skills-chips">
-                            <span class="chip">Python</span>
-                            <span class="chip">AI/ML</span>
-                            <span class="chip">ROS2</span>
-                            <span class="chip">Gazebo</span>
-                            <span class="chip">C++</span>
-                            <span class="chip">Failure Prediction</span>
-                        </div>
+        <!-- ═══════════ MAIN ═══════════ -->
+        <main class="flex-grow md:ml-64 bg-surface-container-low p-6 md:p-8">
+
+            <!-- ── HERO / ABOUT ── -->
+            <section id="about" class="mb-20 max-w-5xl scroll-mt-20">
+                <div
+                    class="inline-block bg-surface-container-highest px-3 py-1 font-mono text-[10px] tracking-widest text-primary mb-4">
+                    // DIRECTORY: /ROOT/ENGINEER/PRAVIN_RAJ
+                </div>
+                <div class="flex flex-col lg:flex-row lg:items-start gap-10 mb-10">
+                    <!-- Left: title + bio -->
+                    <div class="flex-1">
+                        <h1
+                            class="text-5xl md:text-6xl font-headline font-bold tracking-tighter text-white uppercase mb-6 leading-none">
+                            Architecting<br />Intelligent<br />Systems<span class="cursor-blink">_</span>
+                        </h1>
+                        <p class="text-on-surface-variant font-body max-w-2xl text-base md:text-lg leading-relaxed">
+                            AI & Data Science engineer with strong foundations in mathematics, algorithms, and computational problem-solving. Focused on research in machine learning, generative AI, and intelligent multi-agent systems. Experienced in developing experimental AI systems and analysing complex behaviours through rigorous evaluation and logical reasoning.
+                        </p>
+                    </div>
+                    <!-- Right: Vampire Hunter Video -->
+                    <div class="shrink-0 border border-outline-variant/20 overflow-hidden">
+                        <video src="assets/vampirehunter.mp4" autoplay muted loop playsinline
+                            class="block w-full h-[359px] object-cover grayscale brightness-75 hover:grayscale-0 hover:brightness-100 transition-all duration-500"></video>
                     </div>
                 </div>
-            </div>
-        </section>
+                <div
+                    class="grid grid-cols-2 md:grid-cols-4 gap-px bg-outline-variant/20 border border-outline-variant/20">
+                    <div class="bg-surface p-5"><span
+                            class="block font-mono text-[9px] text-on-surface-variant mb-1">DOMAIN</span><span
+                            class="text-sm font-headline font-bold">AI / ML</span></div>
+                    <div class="bg-surface p-5"><span
+                            class="block font-mono text-[9px] text-on-surface-variant mb-1">FOCUS</span><span
+                            class="text-sm font-headline font-bold">MULTI-AGENT</span></div>
+                    <div class="bg-surface p-5"><span
+                            class="block font-mono text-[9px] text-on-surface-variant mb-1">STATUS</span><span
+                            class="text-sm font-headline font-bold">OPEN_TO_WORK</span></div>
+                    <div class="bg-surface p-5"><span
+                            class="block font-mono text-[9px] text-on-surface-variant mb-1">LOCATION</span><span
+                            class="text-sm font-headline font-bold">INDIA</span></div>
+                </div>
+            </section>
 
-        <!-- Projects Section -->
-        <section id="projects" class="section-padding">
-            <div class="container">
-                <h2 class="section-title">Featured Work</h2>
-                <div class="projects-grid">
-                    <!-- Failure Prediction -->
-                    <div class="project-card glass-morphism">
-                        <div class="project-img">
-                            <img src="assets/failure_prediction.png" alt="Failure Prediction in HPC">
+            <!-- ── PROJECTS ── -->
+            <section id="projects" class="mb-20 scroll-mt-20">
+                <div
+                    class="inline-block bg-surface-container-highest px-3 py-1 font-mono text-[10px] tracking-widest text-primary mb-4">
+                    // MODULE: FEATURED_PROJECTS
+                </div>
+                <h2 class="text-4xl font-headline font-bold uppercase tracking-tighter text-white mb-10">
+                    Featured<br />Work.</h2>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 max-w-7xl">
+
+                    <!-- ░ PROJECT 1 — HPC (large) -->
+                    <div
+                        class="lg:col-span-8 group relative bg-surface border border-outline-variant/20 p-8 hover:bg-white hover:text-black transition-all duration-300">
+                        <div class="flex justify-between items-start mb-10">
+                            <div>
+                                <span class="font-mono text-[10px] opacity-60 mb-2 block">[ PROJ_ID: HPC-FAIL-001
+                                    ]</span>
+                                <h3 class="text-3xl md:text-4xl font-headline font-bold uppercase tracking-tighter">
+                                    Failure_Prediction<br />in HPC</h3>
+                            </div>
+                            <div class="text-right shrink-0">
+                                <div class="text-4xl font-headline font-bold tracking-tighter leading-none">CNN</div>
+                                <span class="font-mono text-[10px] uppercase">+Transformer</span>
+                            </div>
                         </div>
-                        <div class="project-info">
-                            <h3>Failure Prediction in HPC</h3>
-                            <p>Hierarchical CNN-Transformer framework for multi-stage failure prediction in supercomputing clusters.</p>
-                            <a href="https://github.com/Pravin-raj-03/Hierarchical-CNN-Transformer-Framework-for-Multi-Stage-Failure-Prediction-in-Supercomputing-Systems" class="btn-text">GitHub <i data-lucide="external-link"></i></a>
+                        <!-- inline chart -->
+                        <div class="h-44 mb-8 border-l border-b border-outline-variant/40 relative overflow-hidden">
+                            <img src="assets/image copy 12.png" class="absolute inset-0 w-full h-full object-cover opacity-10 grayscale group-hover:grayscale-0 group-hover:opacity-20 transition-all duration-500" />
+                            <svg class="w-full h-full relative z-10" preserveAspectRatio="none" viewBox="0 0 400 100">
+                                <path class="text-primary group-hover:text-black"
+                                    d="M0,80 L40,72 L80,78 L120,35 L160,44 L200,14 L240,20 L280,6 L320,10 L360,3 L400,1"
+                                    fill="none" stroke="currentColor" stroke-width="2" />
+                                <path class="text-outline group-hover:text-black"
+                                    d="M0,90 L40,86 L80,91 L120,68 L160,73 L200,58 L240,62 L280,48 L320,52 L360,43 L400,38"
+                                    fill="none" stroke="currentColor" stroke-dasharray="4" stroke-width="1" />
+                            </svg>
+                            <div class="absolute inset-0 grid grid-cols-4 opacity-10 pointer-events-none z-0">
+                                <div class="border-r border-current"></div>
+                                <div class="border-r border-current"></div>
+                                <div class="border-r border-current"></div>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-8">
+                            <span class="font-mono text-[10px] px-2 py-1 border border-current">[CNN]</span>
+                            <span class="font-mono text-[10px] px-2 py-1 border border-current">[TRANSFORMER]</span>
+                            <span class="font-mono text-[10px] px-2 py-1 border border-current">[PYTORCH]</span>
+                            <span class="font-mono text-[10px] px-2 py-1 border border-current">[HPC]</span>
+                        </div>
+                        <div class="flex justify-between items-center pt-6 border-t border-outline-variant/20">
+                            <p class="font-mono text-[10px] max-w-md opacity-70">
+                                Hierarchical CNN-Transformer framework for multi-stage failure prediction in
+                                supercomputing clusters.
+                            </p>
+                            <a href="https://github.com/Pravin-raj-03/Hierarchical-CNN-Transformer-Framework-for-Multi-Stage-Failure-Prediction-in-Supercomputing-Systems"
+                                target="_blank"
+                                class="font-mono text-xs font-bold underline underline-offset-4 ml-4 shrink-0">&gt;
+                                VIEW_SOURCE</a>
                         </div>
                     </div>
 
-                    <!-- AI Robot Dance -->
-                    <div class="project-card glass-morphism">
-                        <div class="project-img">
-                            <img src="assets/robot_dance.png" alt="AI Robot Choreographer">
+                    <!-- ░ PROJECT 2 — Robot Choreographer (small) -->
+                    <div
+                        class="lg:col-span-4 bg-surface-container-high flex flex-col justify-between border border-outline-variant/20 group hover:bg-primary hover:text-on-primary transition-all cursor-pointer overflow-hidden">
+                        <!-- Image thumbnail -->
+                        <div class="relative w-full h-40 overflow-hidden border-b border-outline-variant/20">
+                            <img src="assets/image copy 4.png" alt="AI Robot Choreographer UI"
+                                class="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-500" />
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-surface-container-high via-transparent to-transparent opacity-80 group-hover:from-primary/20">
+                            </div>
                         </div>
-                        <div class="project-info">
-                            <h3>AI Robot Choreographer</h3>
-                            <p>Analyzing music to generate beat-matched dance moves for robots using ROS2 and Gazebo.</p>
-                            <a href="https://github.com/Pravin-raj-03/Ai-robot-dance-choreographer-using-ROS2-and-Gazebo" class="btn-text">GitHub <i data-lucide="external-link"></i></a>
+                        <div class="p-6">
+                            <div class="flex justify-between items-center mb-6">
+                                <span class="material-symbols-outlined text-3xl opacity-40">smart_toy</span>
+                                <span class="font-mono text-[10px] opacity-60">[PROJ-002]</span>
+                            </div>
+                            <h4 class="text-2xl font-headline font-bold uppercase mb-4 tracking-tighter">
+                                AI_Robot<br />Choreographer</h4>
+                            <p class="text-sm font-body opacity-80 mb-6 group-hover:opacity-100">
+                                Analyzing music audio to generate beat-matched dance moves for robots using ROS2 and
+                                Gazebo simulation.
+                            </p>
+                        </div>
+                        <div>
+                            <div class="mb-3">
+                                <div class="flex justify-between text-[10px] font-mono mb-1"><span>STACK: ROS2 +
+                                        GAZEBO</span><span>SIM: ACTIVE</span></div>
+                                <div class="h-1 bg-outline-variant/30 w-full">
+                                    <div class="h-full bg-primary group-hover:bg-on-primary w-[80%]"></div>
+                                </div>
+                            </div>
+                            <div class="flex gap-2 flex-wrap mb-4">
+                                <span class="font-mono text-[9px] uppercase">[ROS2]</span>
+                                <span class="font-mono text-[9px] uppercase">[PYTHON]</span>
+                                <span class="font-mono text-[9px] uppercase">[GAZEBO]</span>
+                            </div>
+                            <a href="https://github.com/Pravin-raj-03/Ai-robot-dance-choreographer-using-ROS2-and-Gazebo"
+                                target="_blank"
+                                class="font-mono text-[10px] font-bold underline underline-offset-4">&gt; GITHUB</a>
                         </div>
                     </div>
 
-                    <!-- Simulation of Success -->
-                    <div class="project-card glass-morphism">
-                        <div class="project-img">
-                            <img src="assets/success_sim.png" alt="Simulation of Success">
+                    <!-- ░ PROJECT 3+4 — Split card -->
+                    <div
+                        class="lg:col-span-12 grid grid-cols-1 md:grid-cols-2 bg-[#1B1B1B] border border-outline-variant/20 hover:border-primary/40 transition-colors">
+                        <div
+                            class="p-8 border-b md:border-b-0 md:border-r border-outline-variant/20 flex flex-col group hover:bg-white hover:text-black transition-all duration-300">
+                            <!-- Thumbnail -->
+                            <div
+                                class="relative w-full h-40 overflow-hidden border border-outline-variant/20 mb-6 group-hover:border-black/10">
+                                <img src="assets/image copy 3.png" alt="Simulation of Success UI"
+                                    class="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-500" />
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-[#1B1B1B] via-transparent to-transparent opacity-60 group-hover:from-white/40">
+                                </div>
+                            </div>
+                            <div>
+                                <span
+                                    class="font-mono text-[10px] uppercase mb-4 block text-outline group-hover:text-black/50">Agent_Simulation_03</span>
+                                <h4
+                                    class="text-2xl md:text-3xl font-headline font-bold uppercase tracking-tighter mb-4">
+                                    Simulation_of<br />Success</h4>
+                                <p class="text-sm opacity-70 mb-8 leading-relaxed group-hover:opacity-100">
+                                    AI-based life simulation using autonomous agents to study the interplay of talent,
+                                    luck, and environment on individual success outcomes.
+                                </p>
+                            </div>
+                            <div class="flex items-center gap-4 flex-wrap">
+                                <a href="https://github.com/Pravin-raj-03/simulation-of-success-using-AI-agents"
+                                    target="_blank"
+                                    class="bg-primary text-on-primary px-6 py-2 text-[10px] font-bold uppercase tracking-widest hover:bg-[#e0e0e0] transition-colors">VIEW_SOURCE</a>
+                                <span class="font-mono text-[10px] text-outline">[MULTI-AGENT]</span>
+                            </div>
                         </div>
-                        <div class="project-info">
-                            <h3>Simulation of Success</h3>
-                            <p>AI-based life simulation using autonomous agents to study talent, luck, and environment influence.</p>
-                            <a href="https://github.com/Pravin-raj-03/simulation-of-success-using-AI-agents" class="btn-text">GitHub <i data-lucide="external-link"></i></a>
+                        <div class="p-8 flex flex-col group hover:bg-white hover:text-black transition-all duration-300">
+                            <!-- Thumbnail -->
+                            <div class="relative w-full h-40 overflow-hidden border border-outline-variant/20 mb-6 group-hover:border-black/10">
+                                <img src="assets/image copy 5.png" alt="Funding AI UI"
+                                    class="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-500" />
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-[#1B1B1B] via-transparent to-transparent opacity-60 group-hover:from-white/40">
+                                </div>
+                            </div>
+                            <div>
+                                <span
+                                    class="font-mono text-[10px] uppercase mb-4 block text-outline group-hover:text-black/50">Funding_Intelligence_04</span>
+                                <h4 class="text-2xl md:text-3xl font-headline font-bold uppercase tracking-tighter mb-4">
+                                    FundingAi</h4>
+                                <p class="text-sm opacity-70 mb-6 leading-relaxed group-hover:opacity-100">
+                                    Multilingual funding intelligence platform for discovering startup opportunities and
+                                    government grant schemes using RAG + NLP.
+                                </p>
+                                <div class="space-y-3 mb-6">
+                                    <div class="flex justify-between items-end border-b border-outline-variant/40 pb-2 group-hover:border-black/10">
+                                        <span class="text-[10px] font-mono uppercase">Languages</span>
+                                        <span class="text-lg font-headline font-bold">Multi</span>
+                                    </div>
+                                    <div class="flex justify-between items-end border-b border-outline-variant/40 pb-2 group-hover:border-black/10">
+                                        <span class="text-[10px] font-mono uppercase">Type</span>
+                                        <span class="text-lg font-headline font-bold">RAG + NLP</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="https://github.com/Pravin-raj-03/FundingAi" target="_blank"
+                                class="font-mono text-[10px] font-bold underline underline-offset-4">&gt; GITHUB</a>
                         </div>
                     </div>
-                    
-                    <!-- FundingAi -->
-                    <div class="project-card glass-morphism">
-                        <div class="project-img">
-                            <img src="assets/funding_ai.png" alt="FundingAi Platform">
+
+                    <!-- ░ PROJECT 5 — JARVIS (medium) -->
+                    <div
+                        class="lg:col-span-5 group bg-surface border border-outline-variant/20 overflow-hidden hover:border-primary/60 transition-all duration-300">
+                        <!-- Image preview -->
+                        <div class="relative w-full h-52 overflow-hidden border-b border-outline-variant/20">
+                            <img src="assets/image copy.png" alt="JARVIS AI Assistant UI"
+                                class="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-500 scale-100 group-hover:scale-105" />
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent opacity-80">
+                            </div>
+                            <span class="absolute bottom-3 left-4 font-mono text-[10px] opacity-60">[ PROJ_ID:
+                                JARVIS-005 ]</span>
                         </div>
-                        <div class="project-info">
-                            <h3>FundingAi</h3>
-                            <p>Multilingual funding intelligence platform for discovering startup opportunities and government schemes.</p>
-                            <a href="https://github.com/Pravin-raj-03/FundingAi" class="btn-text">GitHub <i data-lucide="external-link"></i></a>
+                        <!-- Card body -->
+                        <div class="p-8">
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="text-2xl font-headline font-bold uppercase tracking-tighter">
+                                    JARVIS<br />AI_Assistant</h3>
+                                <span class="material-symbols-outlined text-3xl opacity-40">robot_2</span>
+                            </div>
+                            <p class="text-sm text-on-surface-variant mb-6 leading-relaxed">
+                                Voice-controlled desktop AI assistant with gesture input, LLM-powered action parsing,
+                                web automation, and a futuristic holographic overlay UI.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="font-mono text-[10px] px-2 py-1 border border-outline-variant">[LLM]</span>
+                                <span
+                                    class="font-mono text-[10px] px-2 py-1 border border-outline-variant">[PYTHON]</span>
+                                <span
+                                    class="font-mono text-[10px] px-2 py-1 border border-outline-variant">[SPEECH]</span>
+                                <span class="font-mono text-[10px] px-2 py-1 border border-outline-variant">[CV]</span>
+                            </div>
+                            <a href="https://github.com/Pravin-raj-03" target="_blank"
+                                class="font-mono text-xs font-bold underline underline-offset-4">&gt; GITHUB</a>
                         </div>
+                    </div>
+
+                    <!-- ░ PROJECT 6 — Jailbreak Prevention -->
+                    <div
+                        class="lg:col-span-4 bg-surface-container-high flex flex-col justify-between border border-outline-variant/20 group hover:bg-primary hover:text-on-primary transition-all cursor-pointer overflow-hidden">
+                        <!-- Image thumbnail -->
+                        <div class="relative w-full h-40 overflow-hidden border-b border-outline-variant/20">
+                            <img src="assets/image copy 2.png" alt="Jailbreak Prevention UI"
+                                class="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-500" />
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-surface-container-high via-transparent to-transparent opacity-80 group-hover:from-primary/20">
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-center mb-6">
+                                <span class="material-symbols-outlined text-3xl opacity-40">security</span>
+                                <span class="font-mono text-[10px] opacity-60">[ PROJ_ID: JR-SAFETY-006 ]</span>
+                            </div>
+                            <h4 class="text-2xl font-headline font-bold uppercase mb-4 tracking-tighter">
+                                Jailbreak<br />Prevention</h4>
+                            <p class="text-sm font-body opacity-80 mb-6">
+                                Advanced system to detect and prevent LLM jailbreaking using the latest AI safety
+                                techniques. Forked &amp; extended.
+                            </p>
+                        </div>
+                        <div>
+                            <div class="mb-3">
+                                <div class="flex justify-between text-[10px] font-mono mb-1"><span>FORKS:
+                                        1</span><span>STARS: 1</span></div>
+                                <div class="h-1 bg-outline-variant/30 w-full">
+                                    <div class="h-full bg-primary group-hover:bg-on-primary w-[60%]"></div>
+                                </div>
+                            </div>
+                            <div class="flex gap-2 flex-wrap mb-4">
+                                <span class="font-mono text-[9px] uppercase">[TYPESCRIPT]</span>
+                                <span class="font-mono text-[9px] uppercase">[AI-SAFETY]</span>
+                                <span class="font-mono text-[9px] uppercase">[LLM]</span>
+                            </div>
+                            <a href="https://github.com/Pravin-raj-03/Jailbreak-Prevention" target="_blank"
+                                class="font-mono text-[10px] font-bold underline underline-offset-4">&gt; GITHUB</a>
+                        </div>
+                    </div>
+
+                    <!-- ░ Skills Grid (Categorized) -->
+                    <div id="skills"
+                        class="lg:col-span-3 grid grid-cols-2 lg:grid-cols-1 gap-px bg-outline-variant/20 border border-outline-variant/20 scroll-mt-20 h-fit">
+                        
+                        <!-- Programming -->
+                        <div class="bg-surface p-4 group hover:invert transition-all cursor-crosshair">
+                            <div class="flex items-center gap-3 mb-2 opacity-30 group-hover:opacity-100">
+                                <span class="material-symbols-outlined text-xl">code</span>
+                                <span class="font-mono text-[8px] tracking-widest uppercase font-bold">PROG</span>
+                            </div>
+                            <div class="font-mono text-[9px] leading-tight">PYTHON / JAVA / C</div>
+                        </div>
+
+                        <!-- ML / DL -->
+                        <div class="bg-surface p-4 group hover:invert transition-all cursor-crosshair">
+                            <div class="flex items-center gap-3 mb-2 opacity-30 group-hover:opacity-100">
+                                <span class="material-symbols-outlined text-xl">psychology</span>
+                                <span class="font-mono text-[8px] tracking-widest uppercase font-bold">ML / DL</span>
+                            </div>
+                            <div class="font-mono text-[9px] leading-tight">CNN / LSTM / TRANSFORMERS</div>
+                        </div>
+
+                        <!-- GEN AI -->
+                        <div class="bg-surface p-4 group hover:invert transition-all cursor-crosshair">
+                            <div class="flex items-center gap-3 mb-2 opacity-30 group-hover:opacity-100">
+                                <span class="material-symbols-outlined text-xl">hub</span>
+                                <span class="font-mono text-[8px] tracking-widest uppercase font-bold">GEN AI</span>
+                            </div>
+                            <div class="font-mono text-[9px] leading-tight">RAG / LANGCHAIN / LLM</div>
+                        </div>
+
+                        <!-- AI SECURITY -->
+                        <div class="bg-surface p-4 group hover:invert transition-all cursor-crosshair">
+                            <div class="flex items-center gap-3 mb-2 opacity-30 group-hover:opacity-100">
+                                <span class="material-symbols-outlined text-xl">security</span>
+                                <span class="font-mono text-[8px] tracking-widest uppercase font-bold">SECURITY</span>
+                            </div>
+                            <div class="font-mono text-[9px] leading-tight">JAILBREAK PREVENTION</div>
+                        </div>
+
+                        <!-- BACKEND -->
+                        <div class="bg-surface p-4 group hover:invert transition-all cursor-crosshair">
+                            <div class="flex items-center gap-3 mb-2 opacity-30 group-hover:opacity-100">
+                                <span class="material-symbols-outlined text-xl">settings_input_component</span>
+                                <span class="font-mono text-[8px] tracking-widest uppercase font-bold">BACKEND</span>
+                            </div>
+                            <div class="font-mono text-[9px] leading-tight">FASTAPI / DOCKER / KAFKA</div>
+                        </div>
+
+                        <!-- DATABASES -->
+                        <div class="bg-surface p-4 group hover:invert transition-all cursor-crosshair">
+                            <div class="flex items-center gap-3 mb-2 opacity-30 group-hover:opacity-100">
+                                <span class="material-symbols-outlined text-xl">database</span>
+                                <span class="font-mono text-[8px] tracking-widest uppercase font-bold">DATA</span>
+                            </div>
+                            <div class="font-mono text-[9px] leading-tight">PINECONE / MONGODB / POSTGRES</div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- ░░ ALL REPOSITORIES ░░ -->
+                <div class="mt-10 max-w-7xl">
+                    <div
+                        class="inline-block bg-surface-container-highest px-3 py-1 font-mono text-[10px] tracking-widest text-primary mb-6">
+                        // MODULE: ALL_REPOSITORIES [ 15 / 15 ]
+                    </div>
+                    <div
+                        class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-px bg-outline-variant/20 border border-outline-variant/20">
+
+                        <a href="https://github.com/Pravin-raj-03/Student-Career-Prediction-System" target="_blank"
+                            class="bg-surface group hover:bg-white hover:text-black transition-all duration-200 flex flex-col overflow-hidden border border-outline-variant/20">
+                            <div class="h-32 w-full overflow-hidden border-b border-outline-variant/20">
+                                <img src="assets/image copy 6.png" alt="Student Career Prediction UI"
+                                    class="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-110 transition-all duration-500" />
+                            </div>
+                            <div class="p-6 flex-1 flex flex-col justify-between">
+                                <div>
+                                    <div class="flex justify-between items-center mb-3">
+                                        <span
+                                            class="font-mono text-[9px] text-on-surface-variant group-hover:text-black/60">[ML
+                                            · Python]</span>
+                                        <span class="material-symbols-outlined text-sm opacity-30">open_in_new</span>
+                                    </div>
+                                    <h5 class="font-headline font-bold uppercase text-sm tracking-tighter mb-2">Student
+                                        Career<br />Prediction System</h5>
+                                    <p class="font-mono text-[10px] opacity-60 leading-relaxed group-hover:opacity-100">ML system analysing academic
+                                        performance, skills &amp; interests to provide explainable career recommendations.
+                                    </p>
+                                </div>
+                                <div class="flex gap-2 mt-4">
+                                    <span class="font-mono text-[9px] border border-current px-2 py-0.5">[ML]</span>
+                                    <span class="font-mono text-[9px] border border-current px-2 py-0.5">[CAREER]</span>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="https://github.com/Pravin-raj-03/Web-Navigation-Prefetching-using-ADMM-Optimizer"
+                            target="_blank"
+                            class="bg-surface group hover:bg-white hover:text-black transition-all duration-200 flex flex-col overflow-hidden border border-outline-variant/20">
+                            <div class="h-32 w-full overflow-hidden border-b border-outline-variant/20">
+                                <img src="assets/image copy 7.png" alt="Web Navigation Prefetching UI"
+                                    class="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-110 transition-all duration-500" />
+                            </div>
+                            <div class="p-6 flex-1 flex flex-col justify-between">
+                                <div>
+                                    <div class="flex justify-between items-center mb-3">
+                                        <span
+                                            class="font-mono text-[9px] text-on-surface-variant group-hover:text-black/60">[LSTM
+                                            · ADMM]</span>
+                                        <span class="material-symbols-outlined text-sm opacity-30">open_in_new</span>
+                                    </div>
+                                    <h5 class="font-headline font-bold uppercase text-sm tracking-tighter mb-2">Web
+                                        Navigation<br />Prefetching (ADMM)</h5>
+                                    <p class="font-mono text-[10px] opacity-60 leading-relaxed group-hover:opacity-100">Compares Markov, LSTM &amp;
+                                        BiLSTM with ADMM optimiser for bandwidth-constrained web prefetching.</p>
+                                </div>
+                                <div class="flex gap-2 mt-4">
+                                    <span class="font-mono text-[9px] border border-current px-2 py-0.5">[LSTM]</span>
+                                    <span class="font-mono text-[9px] border border-current px-2 py-0.5">[OPTIMIZER]</span>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="https://github.com/Pravin-raj-03/Comfort-based-route-selector" target="_blank"
+                            class="bg-surface group hover:bg-white hover:text-black transition-all duration-200 flex flex-col overflow-hidden border border-outline-variant/20">
+                            <div class="h-32 w-full overflow-hidden border-b border-outline-variant/20">
+                                <img src="assets/image copy 8.png" alt="Comfort Route Selector UI"
+                                    class="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-110 transition-all duration-500" />
+                            </div>
+                            <div class="p-6 flex-1 flex flex-col justify-between">
+                                <div>
+                                    <div class="flex justify-between items-center mb-3">
+                                        <span
+                                            class="font-mono text-[9px] text-on-surface-variant group-hover:text-black/60">[Python]</span>
+                                        <span class="material-symbols-outlined text-sm opacity-30">open_in_new</span>
+                                    </div>
+                                    <h5 class="font-headline font-bold uppercase text-sm tracking-tighter mb-2">
+                                        Comfort-Based<br />Route Selector</h5>
+                                    <p class="font-mono text-[10px] opacity-60 leading-relaxed group-hover:opacity-100">Route selection system that
+                                        factors in comfort metrics beyond standard shortest-path algorithms.</p>
+                                </div>
+                                <div class="flex gap-2 mt-4">
+                                    <span class="font-mono text-[9px] border border-current px-2 py-0.5">[ROUTING]</span>
+                                    <span class="font-mono text-[9px] border border-current px-2 py-0.5">[PYTHON]</span>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="https://github.com/Pravin-raj-03/Gravitational-Slingshots-Effects" target="_blank"
+                            class="bg-surface group hover:bg-white hover:text-black transition-all duration-200 flex flex-col overflow-hidden border border-outline-variant/20">
+                            <div class="h-32 w-full overflow-hidden border-b border-outline-variant/20">
+                                <img src="assets/image copy 9.png" alt="Gravitational Slingshot Effects UI"
+                                    class="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-110 transition-all duration-500" />
+                            </div>
+                            <div class="p-6 flex-1 flex flex-col justify-between">
+                                <div>
+                                    <div class="flex justify-between items-center mb-3">
+                                        <span
+                                            class="font-mono text-[9px] text-on-surface-variant group-hover:text-black/60">[Python
+                                            · HTML · Sim]</span>
+                                        <span class="material-symbols-outlined text-sm opacity-30">open_in_new</span>
+                                    </div>
+                                    <h5 class="font-headline font-bold uppercase text-sm tracking-tighter mb-2">
+                                        Gravitational<br />Slingshot Effects</h5>
+                                    <p class="font-mono text-[10px] opacity-60 leading-relaxed group-hover:opacity-100">Interactive simulation of
+                                        gravitational slingshot effect with adjustable G constant, planet &amp; ship mass.
+                                    </p>
+                                </div>
+                                <div class="flex gap-2 mt-4">
+                                    <span class="font-mono text-[9px] border border-current px-2 py-0.5">[PHYSICS]</span>
+                                    <span class="font-mono text-[9px] border border-current px-2 py-0.5">[SIM]</span>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="https://github.com/Pravin-raj-03/Bluetooth-Console-Messaging-Peer-to-Peer-Text-over-RFCOMM"
+                            target="_blank"
+                            class="bg-surface group hover:bg-white hover:text-black transition-all duration-200 flex flex-col overflow-hidden border border-outline-variant/20">
+                            <div class="h-32 w-full overflow-hidden border-b border-outline-variant/20">
+                                <img src="assets/image copy 10.png" alt="Bluetooth P2P Messaging UI"
+                                    class="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-110 transition-all duration-500" />
+                            </div>
+                            <div class="p-6 flex-1 flex flex-col justify-between">
+                                <div>
+                                    <div class="flex justify-between items-center mb-3">
+                                        <span
+                                            class="font-mono text-[9px] text-on-surface-variant group-hover:text-black/60">[C#
+                                            · WPF · .NET]</span>
+                                        <span class="material-symbols-outlined text-sm opacity-30">open_in_new</span>
+                                    </div>
+                                    <h5 class="font-headline font-bold uppercase text-sm tracking-tighter mb-2">Bluetooth
+                                        P2P<br />Messaging (RFCOMM)</h5>
+                                    <p class="font-mono text-[10px] opacity-60 leading-relaxed group-hover:opacity-100">P2P Bluetooth chat over
+                                        RFCOMM for real-time messaging without internet connectivity.</p>
+                                </div>
+                                <div class="flex gap-2 mt-4">
+                                    <span class="font-mono text-[9px] border border-current px-2 py-0.5">[C#]</span>
+                                    <span class="font-mono text-[9px] border border-current px-2 py-0.5">[BLUETOOTH]</span>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="https://github.com/Pravin-raj-03/2026-Tamil-Nadu-election-prediction-using-AI"
+                            target="_blank"
+                            class="bg-surface group hover:bg-white hover:text-black transition-all duration-200 flex flex-col overflow-hidden border border-outline-variant/20">
+                            <div class="h-32 w-full overflow-hidden border-b border-outline-variant/20">
+                                <img src="assets/image copy 11.png" alt="TN Election Prediction UI"
+                                    class="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-110 transition-all duration-500" />
+                            </div>
+                            <div class="p-6 flex-1 flex flex-col justify-between">
+                                <div>
+                                    <div class="flex justify-between items-center mb-3">
+                                        <span
+                                            class="font-mono text-[9px] text-on-surface-variant group-hover:text-black/60">[Python
+                                            · ML]</span>
+                                        <span class="material-symbols-outlined text-sm opacity-30">open_in_new</span>
+                                    </div>
+                                    <h5 class="font-headline font-bold uppercase text-sm tracking-tighter mb-2">TN
+                                        Election<br />Prediction 2026</h5>
+                                    <p class="font-mono text-[10px] opacity-60 leading-relaxed group-hover:opacity-100">AI-driven prediction for the
+                                        2026 Tamil Nadu assembly elections using socio-political data.</p>
+                                </div>
+                                <div class="flex gap-2 mt-4">
+                                    <span class="font-mono text-[9px] border border-current px-2 py-0.5">[PREDICTION]</span>
+                                    <span class="font-mono text-[9px] border border-current px-2 py-0.5">[NLP]</span>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="https://github.com/Pravin-raj-03/privacy-ai" target="_blank"
+                            class="bg-surface group hover:bg-white hover:text-black transition-all duration-200 flex flex-col overflow-hidden border border-outline-variant/20">
+                            <div class="h-32 w-full overflow-hidden border-b border-outline-variant/20">
+                                <img src="assets/image copy 14.png" alt="Privacy AI UI"
+                                    class="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-110 transition-all duration-500" />
+                            </div>
+                            <div class="p-6 flex-1 flex flex-col justify-between">
+                                <div>
+                                    <div class="flex justify-between items-center mb-3">
+                                        <span
+                                            class="font-mono text-[9px] text-on-surface-variant group-hover:text-black/60">[JavaScript]</span>
+                                        <span class="material-symbols-outlined text-sm opacity-30">open_in_new</span>
+                                    </div>
+                                    <h5 class="font-headline font-bold uppercase text-sm tracking-tighter mb-2">
+                                        Privacy<br />AI</h5>
+                                    <p class="font-mono text-[10px] opacity-60 leading-relaxed group-hover:opacity-100">Privacy-first AI tooling
+                                        ensuring user data safety and confidentiality in AI-powered applications.</p>
+                                </div>
+                                <div class="flex gap-2 mt-4">
+                                    <span class="font-mono text-[9px] border border-current px-2 py-0.5">[PRIVACY]</span>
+                                    <span class="font-mono text-[9px] border border-current px-2 py-0.5">[JS]</span>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="https://github.com/Pravin-raj-03/jailbreak-prevention-ai" target="_blank"
+                            class="bg-surface group hover:bg-white hover:text-black transition-all duration-200 flex flex-col overflow-hidden border border-outline-variant/20">
+                            <div class="h-32 w-full overflow-hidden border-b border-outline-variant/20">
+                                <img src="assets/image copy 17.png" alt="Jailbreak Prevention UI"
+                                    class="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-110 transition-all duration-500" />
+                            </div>
+                            <div class="p-6 flex-1 flex flex-col justify-between">
+                                <div>
+                                    <div class="flex justify-between items-center mb-3">
+                                        <span
+                                            class="font-mono text-[9px] text-on-surface-variant group-hover:text-black/60">[AI Security · Python]</span>
+                                        <span class="material-symbols-outlined text-sm opacity-30">open_in_new</span>
+                                    </div>
+                                    <h5 class="font-headline font-bold uppercase text-sm tracking-tighter mb-2">Jailbreak
+                                        Prevention<br />Framework</h5>
+                                    <p class="font-mono text-[10px] opacity-60 leading-relaxed group-hover:opacity-100">Robust defensive layer detecting and neutralizing adversarial jailbreak prompts in LLM applications.</p>
+                                </div>
+                                <div class="flex gap-2 mt-4">
+                                    <span class="font-mono text-[9px] border border-current px-2 py-0.5">[SECURITY]</span>
+                                    <span class="font-mono text-[9px] border border-current px-2 py-0.5">[LLM]</span>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="https://github.com/Pravin-raj-03/prompt-injection-detection" target="_blank"
+                            class="bg-surface group hover:bg-white hover:text-black transition-all duration-200 flex flex-col overflow-hidden border border-outline-variant/20">
+                            <div class="h-32 w-full overflow-hidden border-b border-outline-variant/20">
+                                <img src="assets/image copy 18.png" alt="Prompt Injection Detection UI"
+                                    class="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-110 transition-all duration-500" />
+                            </div>
+                            <div class="p-6 flex-1 flex flex-col justify-between">
+                                <div>
+                                    <div class="flex justify-between items-center mb-3">
+                                        <span
+                                            class="font-mono text-[9px] text-on-surface-variant group-hover:text-black/60">[NLP · Transformer]</span>
+                                        <span class="material-symbols-outlined text-sm opacity-30">open_in_new</span>
+                                    </div>
+                                    <h5 class="font-headline font-bold uppercase text-sm tracking-tighter mb-2">Prompt
+                                        Injection<br />Detection System</h5>
+                                    <p class="font-mono text-[10px] opacity-60 leading-relaxed group-hover:opacity-100">Real-time detection of prompt injection attacks using transformer-based sentiment and intent analysis.</p>
+                                </div>
+                                <div class="flex gap-2 mt-4">
+                                    <span class="font-mono text-[9px] border border-current px-2 py-0.5">[AISEC]</span>
+                                    <span class="font-mono text-[9px] border border-current px-2 py-0.5">[NLP]</span>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="https://github.com/Pravin-raj-03/bakery-website-ui-template" target="_blank"
+                            class="bg-surface group hover:bg-white hover:text-black transition-all duration-200 flex flex-col overflow-hidden border border-outline-variant/20">
+                            <div class="h-32 w-full overflow-hidden border-b border-outline-variant/20">
+                                <img src="assets/image copy 13.png" alt="Bakery Website UI UI"
+                                    class="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-110 transition-all duration-500" />
+                            </div>
+                            <div class="p-6 flex-1 flex flex-col justify-between">
+                                <div>
+                                    <div class="flex justify-between items-center mb-3">
+                                        <span
+                                            class="font-mono text-[9px] text-on-surface-variant group-hover:text-black/60">[HTML
+                                            · CSS]</span>
+                                        <span class="material-symbols-outlined text-sm opacity-30">open_in_new</span>
+                                    </div>
+                                    <h5 class="font-headline font-bold uppercase text-sm tracking-tighter mb-2">Bakery
+                                        Website<br />UI Template</h5>
+                                    <p class="font-mono text-[10px] opacity-60 leading-relaxed group-hover:opacity-100">Clean, modern bakery website
+                                        template — responsive design with rich visual components.</p>
+                                </div>
+                                <div class="flex gap-2 mt-4">
+                                    <span class="font-mono text-[9px] border border-current px-2 py-0.5">[HTML]</span>
+                                    <span class="font-mono text-[9px] border border-current px-2 py-0.5">[⭐ 1]</span>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- View All CTA -->
+                        <a href="https://github.com/Pravin-raj-03?tab=repositories" target="_blank"
+                            class="bg-surface-container-highest p-6 flex flex-col items-center justify-center group hover:bg-white hover:text-black transition-all duration-200 text-center border border-outline-variant/40 relative overflow-hidden">
+                            <img src="assets/image copy 15.png" alt="View All Background"
+                                class="absolute inset-0 w-full h-full object-cover opacity-10 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 scale-100 group-hover:scale-110" />
+                            <div class="relative z-10 flex flex-col items-center">
+                                <span
+                                    class="material-symbols-outlined text-4xl opacity-30 mb-3 group-hover:opacity-100">arrow_outward</span>
+                                <div class="font-mono text-[10px] tracking-widest">VIEW_ALL_REPOS</div>
+                                <div class="font-mono text-[9px] opacity-50 mt-1">github.com/Pravin-raj-03</div>
+                            </div>
+                        </a>
+
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Contact Section -->
-        <section id="contact" class="section-padding">
-            <div class="container">
-                <div class="contact-card glass-morphism">
-                    <h2 class="section-title">Get in Touch</h2>
-                    <p>Have a project in mind or just want to say hi?</p>
-                    <a href="mailto:thewayitis07@gmail.com" class="btn btn-primary">Send an Email</a>
+            <!-- ── TERMINAL FAQ ── -->
+            <section id="faq" class="mb-20 scroll-mt-20">
+                <div
+                    class="inline-block bg-surface-container-highest px-3 py-1 font-mono text-[10px] tracking-widest text-primary mb-4">
+                    // MODULE: INTERACTIVE_FAQ_TERMINAL
                 </div>
-            </div>
-        </section>
-    </main>
+                <h2 class="text-4xl font-headline font-bold uppercase tracking-tighter text-white mb-10">
+                    FAQ<br />Terminal.</h2>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Pravin raj. Built with passion & AI.</p>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch max-w-7xl">
+
+                    <!-- Left: Terminal -->
+                    <div class="flex flex-col lg:col-span-8">
+                        <div class="border border-outline-variant/40 flex-1" style="background:#0e0e0e;">
+                            <!-- Terminal chrome -->
+                            <div
+                                class="flex items-center gap-2 px-4 py-3 border-b border-outline-variant/40 bg-[#1a1a1a]">
+                                <span class="w-3 h-3 rounded-full bg-[#ff5f57] inline-block"></span>
+                                <span class="w-3 h-3 rounded-full bg-[#febc2e] inline-block"></span>
+                                <span class="w-3 h-3 rounded-full bg-[#28c840] inline-block"></span>
+                                <span
+                                    class="font-mono text-[10px] text-[#919191] ml-3 tracking-widest">pravinraj@terminal
+                                    ~ /faq</span>
+                            </div>
+
+                            <!-- Output area -->
+                            <div id="terminal-body" class="p-5 font-mono text-xs space-y-3 relative overflow-hidden">
+                                <img src="assets/image copy 16.png" class="absolute inset-0 w-full h-full object-cover opacity-10 grayscale pointer-events-none" />
+                                <div class="term-output relative z-10">
+                                    <span class="text-primary">system@pravin-terminal</span> v1.0.0 — Initialised.<br />
+                                    Type a command below or click a quick-action to learn about me.
+                                </div>
+                                <div class="pt-1 flex flex-wrap gap-1 relative z-10" id="quick-btns">
+                                    <button class="term-btn" onclick="runCmd('whoami')">whoami</button>
+                                    <button class="term-btn" onclick="runCmd('skills')">skills</button>
+                                    <button class="term-btn" onclick="runCmd('projects')">projects</button>
+                                    <button class="term-btn" onclick="runCmd('goals')">goals</button>
+                                    <button class="term-btn" onclick="runCmd('contact')">contact</button>
+                                    <button class="term-btn" onclick="runCmd('availability')">availability</button>
+                                    <button class="term-btn" onclick="runCmd('fun_fact')">fun_fact</button>
+                                    <button class="term-btn" onclick="runCmd('help')">help</button>
+                                    <button class="term-btn" onclick="clearTerm()">clear</button>
+                                </div>
+                            </div>
+
+                            <!-- Input line -->
+                            <div id="term-input-line" class="px-5 pb-4 mx-5">
+                                <span class="term-prompt font-mono text-xs">$&gt;</span>
+                                <input id="term-input" type="text" placeholder="type a command..." autocomplete="off"
+                                    spellcheck="false" onkeydown="if(event.key==='Enter') runCmd(this.value)" />
+                                <span class="cursor-blink text-white font-mono text-xs">█</span>
+                            </div>
+                        </div>
+                        <p class="font-mono text-[10px] text-on-surface-variant mt-3">Try: <span
+                                class="text-primary">whoami</span> · <span class="text-primary">skills</span> · <span
+                                class="text-primary">fun_fact</span> · <span class="text-primary">help</span></p>
+                    </div>
+
+                    <!-- Right: demonslayer.mp4 panel -->
+                    <div class="group relative border border-outline-variant/40 overflow-hidden lg:col-span-4 bg-black">
+                        <video src="assets/demonslayer.mp4" autoplay muted loop playsinline
+                            class="w-full h-full object-cover object-center grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-500 scale-[1.2]"></video>
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none">
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 p-5">
+                            <span class="font-mono text-[9px] text-[#919191] block mb-1">// SYSTEM_IDENTITY</span>
+                            <p class="font-headline font-bold text-white text-lg uppercase tracking-tighter">
+                                Pravin_Raj<br /><span class="text-sm opacity-60">AI / ML Engineer</span></p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ── CONTACT ── -->
+            <section id="contact" class="mb-20 scroll-mt-20">
+                <div
+                    class="inline-block bg-surface-container-highest px-3 py-1 font-mono text-[10px] tracking-widest text-primary mb-4">
+                    // MODULE: CONTACT_TERMINAL
+                </div>
+                <h2 class="text-4xl font-headline font-bold uppercase tracking-tighter text-white mb-10">
+                    Get_In<br />Touch.</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl">
+                    <!-- Mail Card -->
+                    <div class="bg-surface border border-outline-variant/20 p-8 relative overflow-hidden group/mail">
+                        <img src="assets/image copy 18.png" class="absolute inset-0 w-full h-full object-cover opacity-5 grayscale group-hover/mail:opacity-20 group-hover/mail:grayscale-0 transition-all duration-700 scale-110" />
+                        <div class="relative z-10">
+                            <div class="flex justify-between items-center mb-6">
+                                <span class="material-symbols-outlined text-3xl">mail</span>
+                                <span class="font-mono text-[10px]">[EMAIL]</span>
+                            </div>
+                            <h4 class="font-headline text-xl font-bold uppercase mb-2">Direct_Line</h4>
+                            <p class="text-sm text-on-surface-variant mb-6">Have a project in mind, collaboration proposal, or just want to say hi?</p>
+                            <a href="mailto:rppravinrajprakash@gmail.com"
+                                class="block w-full bg-primary text-on-primary font-bold py-3 text-[10px] tracking-widest text-center hover:bg-[#e0e0e0] transition-colors relative z-20">
+                                SEND_EMAIL &rarr;
+                            </a>
+                            <div class="mt-4 font-mono text-[10px] text-on-surface-variant">rppravinrajprakash@gmail.com</div>
+                        </div>
+                    </div>
+
+                    <!-- Connect Card -->
+                    <div class="bg-surface border border-outline-variant/20 p-8 relative overflow-hidden group/connect">
+                        <img src="assets/image copy 20.png" class="absolute inset-0 w-full h-full object-cover opacity-5 grayscale group-hover/connect:opacity-20 group-hover/connect:grayscale-0 transition-all duration-700 scale-110" />
+                        <div class="relative z-10">
+                            <div class="flex justify-between items-center mb-6">
+                                <span class="material-symbols-outlined text-3xl">link</span>
+                                <span class="font-mono text-[10px]">[NETWORK]</span>
+                            </div>
+                            <h4 class="font-headline text-xl font-bold uppercase mb-6">Connect</h4>
+                            <div class="space-y-3">
+                                <a href="https://linkedin.com/in/pravin-raj-r-p" target="_blank"
+                                    class="flex justify-between items-center border-b border-outline-variant/40 pb-3 hover:text-primary transition-colors">
+                                    <div class="flex items-center gap-2">
+                                        <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                                        <span class="font-mono text-[10px] uppercase">LinkedIn</span>
+                                    </div>
+                                    <span class="font-mono text-[10px]">pravin-raj-r-p &rarr;</span>
+                                </a>
+                                <a href="https://github.com/Pravin-raj-03" target="_blank"
+                                    class="flex justify-between items-center border-b border-outline-variant/40 pb-3 hover:text-primary transition-colors">
+                                    <div class="flex items-center gap-2">
+                                        <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                                        <span class="font-mono text-[10px] uppercase">GitHub</span>
+                                    </div>
+                                    <span class="font-mono text-[10px]">Pravin-raj-03 &rarr;</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- New Image Column -->
+                    <div class="bg-surface border border-outline-variant/20 overflow-hidden group/contact-img">
+                        <img src="assets/image copy 19.png" alt="Contact Visual"
+                            class="w-full h-full object-cover grayscale brightness-75 group-hover/contact-img:grayscale-0 group-hover/contact-img:brightness-100 transition-all duration-700 scale-100 group-hover/contact-img:scale-110" />
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- ═══════════ FOOTER ═══════════ -->
+    <footer
+        class="bg-[#0E0E0E] text-[#C6C6C6] font-mono text-[10px] uppercase tracking-[0.2em] border-t border-[#474747]/20 z-40 relative md:ml-64">
+        <div class="grid grid-cols-1 md:grid-cols-2 w-full px-8 py-6 max-w-7xl mx-auto items-center gap-4">
+            <div>©2025 PRAVIN_RAJ // ALL RIGHTS RESERVED</div>
+            <div class="flex md:justify-end gap-6">
+                <a class="text-[#919191] hover:text-white transition-opacity" href="https://github.com/Pravin-raj-03"
+                    target="_blank">GITHUB</a>
+                <a class="text-[#919191] hover:text-white transition-opacity"
+                    href="https://linkedin.com/in/pravin-raj-r-p" target="_blank">LINKEDIN</a>
+                <a class="text-white underline underline-offset-4" href="mailto:rppravinrajprakash@gmail.com">EMAIL</a>
+            </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- ═══════════ SCRIPTS ═══════════ -->
     <script>
-        lucide.createIcons();
+        // ── Mobile Menu ──────────────────────────────────
+        function toggleMenu() {
+            document.getElementById('mobile-menu').classList.toggle('open');
+        }
+
+        // ── Active sidebar highlight on scroll ───────────
+        const sections = document.querySelectorAll('section[id]');
+        const sideLinks = document.querySelectorAll('.side-link');
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = '#' + entry.target.id;
+                    sideLinks.forEach(a => {
+                        const active = a.getAttribute('href') === id;
+                        a.classList.toggle('bg-white', active);
+                        a.classList.toggle('text-black', active);
+                        a.classList.toggle('font-bold', active);
+                        a.classList.toggle('text-[#C6C6C6]', !active);
+                    });
+                }
+            });
+        }, { threshold: 0.35 });
+        sections.forEach(s => io.observe(s));
+
+        // ── Terminal FAQ ──────────────────────────────────
+        const RESPONSES = {
+            whoami: `<span class="highlight">Pravin Raj</span> — AI & Data Science engineer based in India.<br>
+I build intelligent systems: multi-agent simulations, robotics controllers, voice-driven AI assistants, and NLP platforms.<br>
+Currently pursuing my degree while actively working on cutting-edge AI projects.`,
+
+            skills: `<span class="highlight">CORE STACK:</span><br>
+  Python · PyTorch · TensorFlow · Scikit-learn<br>
+  ROS2 · Gazebo · C++ (robotics/embedded)<br>
+  LLMs · RAG · Generative AI · Multi-Agent Systems<br>
+  OpenCV · MediaPipe · Data Science / Pandas / NumPy<br>
+  Git · Linux · LaTeX`,
+
+            projects: `<span class="highlight">FEATURED PROJECTS:</span><br>
+  [1] HPC Failure Prediction — CNN + Transformer framework<br>
+  [2] AI Robot Choreographer — music-driven ROS2 robot dance<br>
+  [3] Simulation of Success — multi-agent life simulator<br>
+  [4] FundingAi — multilingual RAG funding discovery platform<br>
+  [5] JARVIS AI Assistant — voice + gesture desktop assistant<br>
+  [6] Gesture Control System — dual-hand OS control via MediaPipe`,
+
+            goals: `<span class="highlight">CURRENT GOALS:</span><br>
+  → Publish research in multi-agent simulation & AI behaviour<br>
+  → Build production-grade generative AI systems<br>
+  → Contribute to open-source robotics & AI tooling<br>
+  → Collaborate on high-impact AI for social good`,
+
+            contact: `<span class="highlight">CONTACT:</span><br>
+  Email    →  <a href="mailto:rppravinrajprakash@gmail.com" class="underline text-primary">rppravinrajprakash@gmail.com</a><br>
+  LinkedIn →  <a href="https://linkedin.com/in/pravin-raj-r-p" target="_blank" class="underline text-primary">linkedin.com/in/pravin-raj-r-p</a><br>
+  GitHub   →  <a href="https://github.com/Pravin-raj-03" target="_blank" class="underline text-primary">github.com/Pravin-raj-03</a>`,
+
+            availability: `<span class="highlight">AVAILABILITY:</span><br>
+  Status     →  OPEN_TO_WORK ✓<br>
+  Roles      →  Internships · Research roles · Freelance<br>
+  Domains    →  AI / ML · Robotics · Data Science<br>
+  Mode       →  Remote-friendly, India-based`,
+
+            fun_fact: (function () {
+                const facts = [
+                    "I once trained a robot to dance by feeding it BPM data — it had better rhythm than most humans. 🤖💃",
+                    "My JARVIS assistant can open YouTube, search the web, and troll me back — all via voice command.",
+                    "I wrote a simulation to study why successful people succeed. Spoiler: luck matters more than we admit.",
+                    "I debug code with the same energy I'd use to defuse a bomb. Sweat, focus… occasional victory screaming.",
+                    "My first robotics simulation crashed so spectacularly it looked intentional. I called it art.",
+                ];
+                return `<span class="highlight">FUN FACT #${Math.floor(Math.random() * 5 + 1)}:</span><br>${facts[Math.floor(Math.random() * facts.length)]}`;
+            }),
+
+            help: `<span class="highlight">AVAILABLE COMMANDS:</span><br>
+  whoami        — who is Pravin Raj?<br>
+  skills        — tech stack & tools<br>
+  projects      — featured project list<br>
+  goals         — current objectives<br>
+  contact       — ways to reach out<br>
+  availability  — hiring / collaboration status<br>
+  music         — open the music terminal<br>
+  fun_fact      — random fun fact<br>
+  clear         — clear terminal<br>
+  help          — show this menu`,
+
+            music: `<span class="highlight">MUSIC_SYSTEM_V1:</span><br>
+  [1] Vivaldi - Winter I<br>
+  [2] Barber - Adagio for Strings<br><br>
+  Type <span class="text-primary">play</span> or <span class="text-primary">pause</span> to control playback.`
+        };
+
+        const ALIASES = {
+            'ls': 'projects', 'cat whoami': 'whoami', 'about': 'whoami',
+            'tech': 'skills', 'stack': 'skills', 'hire': 'availability',
+            'email': 'contact', 'links': 'contact', 'random': 'fun_fact',
+            'play': (function() { togglePlay(); return '<span class="text-primary">Executing play/pause...</span>'; }),
+            'pause': (function() { if(isPlaying) togglePlay(); return '<span class="text-primary">Playback paused.</span>'; }),
+            'next': (function() { nextTrack(); return '<span class="text-primary">Skipping to next track...</span>'; }),
+            'prev': (function() { prevTrack(); return '<span class="text-primary">Returning to previous...</span>'; }),
+        };
+
+        // ── AUDIO SYSTEM ──────────────────────────────────
+        const SONGS = [
+            { name: "Vivaldi: Winter I", artist: "The Four Seasons", src: "assets/02.04. Winter_ I - Allegro Non Molto.mp3" },
+            { name: "Barber: Adagio for Strings", artist: "HAUSER & LSO", src: "assets/Samuel Barber, HAUSER, London Symphony Orchestra - Adagio for Strings (SPOTISAVER).mp3" }
+        ];
+
+        let songIndex = 0;
+        let isPlaying = false;
+        const audio = new Audio(SONGS[songIndex].src);
+        const playBtn = document.getElementById('play-pause-btn');
+        const progress = document.getElementById('progress-bar');
+        const progressContainer = document.getElementById('progress-container');
+        const timeDisplay = document.getElementById('player-time');
+        const trackTitle = document.getElementById('track-name');
+        const trackArtist = document.getElementById('track-artist');
+        const visualizer = document.getElementById('visualizer');
+
+        function updatePlayerUI() {
+            trackTitle.innerText = SONGS[songIndex].name;
+            trackArtist.innerText = SONGS[songIndex].artist;
+            playBtn.innerText = isPlaying ? 'pause' : 'play_arrow';
+            visualizer.classList.toggle('playing', isPlaying);
+        }
+
+        function togglePlay() {
+            if (isPlaying) {
+                audio.pause();
+            } else {
+                audio.play();
+            }
+            isPlaying = !isPlaying;
+            updatePlayerUI();
+        }
+
+        function nextTrack() {
+            songIndex = (songIndex + 1) % SONGS.length;
+            loadAndPlay();
+        }
+
+        function prevTrack() {
+            songIndex = (songIndex - 1 + SONGS.length) % SONGS.length;
+            loadAndPlay();
+        }
+
+        function loadAndPlay() {
+            audio.src = SONGS[songIndex].src;
+            if (isPlaying) audio.play();
+            updatePlayerUI();
+        }
+
+        audio.addEventListener('timeupdate', () => {
+            const { duration, currentTime } = audio;
+            const percent = (currentTime / duration) * 100;
+            progress.style.width = `${percent}%`;
+            
+            const formatTime = (t) => Math.floor(t / 60) + ":" + ("0" + Math.floor(t % 60)).slice(-2);
+            timeDisplay.innerText = `${formatTime(currentTime)} / ${formatTime(duration || 0)}`;
+        });
+
+        progressContainer.addEventListener('click', (e) => {
+            const width = progressContainer.clientWidth;
+            const clickX = e.offsetX;
+            const duration = audio.duration;
+            audio.currentTime = (clickX / width) * duration;
+        });
+
+        audio.addEventListener('ended', nextTrack);
+
+        let history = [];
+        let histIdx = -1;
+
+        function appendLine(html, type = 'output') {
+            const body = document.getElementById('terminal-body');
+            const div = document.createElement('div');
+            div.className = type === 'cmd' ? 'term-line' : 'term-output';
+            div.innerHTML = html;
+            // insert before the quick-btns div
+            const btns = document.getElementById('quick-btns');
+            body.insertBefore(div, btns);
+            body.scrollTop = body.scrollHeight;
+        }
+
+        function runCmd(raw) {
+            const input = document.getElementById('term-input');
+            const cmd = (raw || input.value).trim().toLowerCase();
+            if (!cmd) return;
+            input.value = '';
+            history.unshift(cmd);
+            histIdx = -1;
+
+            // echo command
+            appendLine(`<span class="term-prompt">$&gt;</span>&nbsp;<span class="term-cmd">${escHtml(cmd)}</span>`, 'cmd');
+
+            const key = ALIASES[cmd] || cmd;
+            let resp = RESPONSES[key];
+
+            if (cmd === 'clear') { clearTerm(); return; }
+            if (typeof resp === 'function') resp = resp();
+            if (!resp) resp = `<span style="color:#ff5f57">command not found: <b>${escHtml(cmd)}</b></span> — try <span class="text-primary">help</span>`;
+
+            appendLine(resp);
+        }
+
+        function clearTerm() {
+            const body = document.getElementById('terminal-body');
+            // remove all children except quick-btns
+            const btns = document.getElementById('quick-btns');
+            while (body.firstChild && body.firstChild !== btns) { body.removeChild(body.firstChild); }
+            const msg = document.createElement('div');
+            msg.className = 'term-output';
+            msg.innerHTML = '<span class="text-primary">Terminal cleared.</span> Type <span class="text-primary">help</span> for commands.';
+            body.insertBefore(msg, btns);
+        }
+
+        function escHtml(s) {
+            return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
+        // Keyboard history navigation
+        document.getElementById('term-input').addEventListener('keydown', function (e) {
+            if (e.key === 'ArrowUp') { histIdx = Math.min(histIdx + 1, history.length - 1); this.value = history[histIdx] || ''; }
+            if (e.key === 'ArrowDown') { histIdx = Math.max(histIdx - 1, -1); this.value = histIdx < 0 ? '' : (history[histIdx] || ''); }
+        });
     </script>
 </body>
+
 </html>
